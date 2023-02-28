@@ -1,26 +1,53 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app">
+    <div class="wrapper">
+      <div class="sidebar" data-color="white" data-active-color="danger">
+        <div class="logo">
+          <a href="https://kikik27.github.io" class="simple-text logo-mini">
+            <div class="logo-image-small">
+              <img src="assets/img/favicon.png" />
+            </div>
+          </a>
+          <a href="https://kikik27.github.io" class="simple-text logo-normal"
+            >PERSILET</a
+          >
+        </div>
+        <Sidebar />
+      </div>
+      <div class="main-panel">
+        <Navbar />
+        <router-view />
+        <Footer />
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Footer from "./components/Footer.vue";
+import Navbar from "./components/Navbar.vue";
+import Sidebar from "./components/Sidebar.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    Footer,
+    Navbar,
+    Sidebar,
+  },
+  data() {
+    return {
+      status: "login",
+    };
+  },
+  methods: {
+    register() {
+      this.status = "register";
+    },
+    login(){
+      this.status = "login";
+    }
+  },
+};
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style></style>
