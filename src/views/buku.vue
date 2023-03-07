@@ -240,7 +240,7 @@ export default {
     },
     getBuku(page = 1) {
       axios
-        .get("http://localhost:8001/api/buku?page=" + page)
+        .get("http://localhost:8000/api/buku?page=" + page)
         .then(response => {
           this.buku = response.data;
           this.load = false;
@@ -251,7 +251,7 @@ export default {
     },
     hapus(id) {
       axios
-        .delete(`http://localhost:8001/api/deletebuku/${id}`)
+        .delete(`http://localhost:8000/api/deletebuku/${id}`)
         .then(response => {
           this.Alert(response);
         })
@@ -261,7 +261,7 @@ export default {
     },
     add() {
       axios
-        .post("http://localhost:8001/api/addbuku", this.model.buku)
+        .post("http://localhost:8000/api/addbuku", this.model.buku)
         .then(response => {
           this.Alert(response);
         })
@@ -271,7 +271,7 @@ export default {
     },
     deletebuku(id) {
       axios
-        .delete(`http://localhost:8001/api/deletebuku/${id}`)
+        .delete(`http://localhost:8000/api/deletebuku/${id}`)
         .then(response => {
           this.Alert(response);
         })
@@ -282,7 +282,7 @@ export default {
     edit() {
       axios
         .put(
-          `http://localhost:8001/api/ubahbuku/${this.form.id_buku}`,
+          `http://localhost:8000/api/ubahbuku/${this.form.id_buku}`,
           this.form
         )
         .then(response => {

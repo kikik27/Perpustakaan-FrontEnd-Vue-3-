@@ -202,21 +202,21 @@ export default {
     },
     getdetail(page = 1) {
       axios
-        .get("http://localhost:8001/api/detailpeminjaman?page=" + page)
+        .get("http://localhost:8000/api/detailpeminjaman?page=" + page)
         .then(response => {
           this.detail_peminjaman = response.data;
           this.load = false;
         });
     },
     getpeminjaman() {
-      axios.get("http://localhost:8001/api/peminjaman").then(response => {
+      axios.get("http://localhost:8000/api/peminjaman").then(response => {
         this.peminjaman = response.data;
         this.load = false;
       });
     },
     AddPeminjaman() {
       axios
-        .post("http://localhost:8001/api/addpeminjaman", this.model.peminjaman)
+        .post("http://localhost:8000/api/addpeminjaman", this.model.peminjaman)
         .then(response => {
           this.Alert(response);
         })
@@ -226,7 +226,7 @@ export default {
     },
     getSiswa() {
       axios
-        .get("http://localhost:8001/api/datasiswa")
+        .get("http://localhost:8000/api/datasiswa")
         .then(response => {
           this.siswa = response.data;
         })
@@ -242,7 +242,7 @@ export default {
     // },
     getBuku() {
       axios
-        .get("http://localhost:8001/api/allbuku")
+        .get("http://localhost:8000/api/allbuku")
         .then(response => {
           this.buku = response.data;
         })
@@ -252,7 +252,7 @@ export default {
     },
     bayar(id) {
       axios
-        .post(`http://localhost:8001/api/bayardenda/${id}`)
+        .post(`http://localhost:8000/api/bayardenda/${id}`)
         .then(response => {
           this.Alert(response);
         })
@@ -262,7 +262,7 @@ export default {
     },
     kembalikan(id) {
       axios
-        .post(`http://localhost:8001/api/kembalikanbuku/${id}`)
+        .post(`http://localhost:8000/api/kembalikanbuku/${id}`)
         .then(response => {
           this.Alert(response);
         })

@@ -27,7 +27,8 @@
 import Footer from "./components/Footer.vue";
 import Navbar from "./components/Navbar.vue";
 import Sidebar from "./components/Sidebar.vue";
-
+import axios from "axios";
+import Cookies from "js-cookie";
 export default {
   name: "App",
   components: {
@@ -35,19 +36,15 @@ export default {
     Navbar,
     Sidebar,
   },
-  data() {
-    return {
-      status: "login",
-    };
-  },
-  methods: {
-    register() {
-      this.status = "register";
+  methods:{
+    cek() {
+      const token = Cookies.get("token");
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     },
-    login(){
-      this.status = "login";
-    }
   },
+  mounted(){
+    this.cek()
+  }
 };
 </script>
 <style></style>

@@ -5,8 +5,8 @@ import Dashboard from '../views/Dashboard.vue'
 import kelasPage from '../views/kelas.vue'
 import bukuPage from '../views/buku.vue'
 import peminjamanPage from '../views/peminjaman.vue'
-import login from '../views/login.vue'
-
+import login from '../components/login.vue'
+import register from '../components/Register.vue'
 
 const routes = [
   {
@@ -14,16 +14,6 @@ const routes = [
     name : 'dashboard',
     component : Dashboard
   },
-  {
-    path : '/login',
-    name : 'login',
-    component : login
-  },
-  // {
-  //   path : '/tes',
-  //   name : 'tes',
-  //   component : tes
-  // },
   {
     path: '/siswa',
     name: 'siswa',
@@ -45,18 +35,27 @@ const routes = [
     component: peminjamanPage
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/siswa.vue')
-  }
+    path : '/login',
+    name : 'login',
+    component: login
+  },
+  {
+    path : '/register',
+    name : 'register',
+    component: register
+  },
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+
+const Auth = JSON.parse(localStorage.getItem('Auth'));
+router.beforeEach((to,from,next) => {
+ if(to.name !=='login' && !Auth) next({ name: 'login' });
+ if(to.name =='login' && 'register' && Auth) next({ name: 'dashboard' });
+ else next()
+});
 
 export default router

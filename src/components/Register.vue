@@ -1,94 +1,81 @@
 <template>
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-7 col-lg-5">
-        <div class="wrap">
-          <div
-            class="img"
-            style="background-image: url(assets/img/login.png)"
-          ></div>
-          <div class="login-wrap p-4 p-md-5">
-            <div class="d-flex">
-              <div class="w-100">
-                <h3 class="mb-4">Sign Up</h3>
-              </div>
-              <div class="w-100">
-                <p class="social-media d-flex justify-content-end">
-                  <a
-                    href="#"
-                    class="social-icon d-flex align-items-center justify-content-center"
-                    ><span class="fa fa-facebook"></span
-                  ></a>
-                  <a
-                    href="#"
-                    class="social-icon d-flex align-items-center justify-content-center"
-                    ><span class="fa fa-twitter"></span
-                  ></a>
-                </p>
-              </div>
-            </div>
-            <form action="" class="signin-form" method="post">
-              <div class="form-group mt-3">
-                <input type="text" name="name" class="form-control" required />
-                <label class="form-control-placeholder" for="name">Name</label>
-              </div>
-              <div class="form-group mt-3">
-                <input
-                  type="text"
-                  name="username"
-                  class="form-control"
-                  required
-                />
-                <label class="form-control-placeholder" for="username"
-                  >Username</label
-                >
-              </div>
-              <div class="form-group mt-3">
-                <input type="text" name="tlpn" class="form-control" required />
-                <label class="form-control-placeholder" for="username"
-                  >No Tlpn</label
-                >
-              </div>
-              <div class="form-group">
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  class="form-control"
-                  required
-                />
-                <label class="form-control-placeholder" for="password"
-                  >Password</label
-                >
-                <span
-                  toggle="#password"
-                  class="fa fa-fw fa-eye field-icon toggle-password"
-                ></span>
-              </div>
-              <div class="form-group">
-                <button
-                  type="submit"
-                  name="submit"
-                  class="form-control btn btn-primary rounded submit px-3"
-                >
-                  Sign Up
-                </button>
-              </div>
-            </form>
-            <p class="text-center">
-              Have Account ?<a @click="login"> Sign In</a>
-            </p>
-          </div>
-        </div>
-      </div>
+  <div class="content">
+    <div class="row">
+      <h2>Login</h2>
+      <input type="email" v-model="login.email" class="form-control" placeholder="email" />
+      <input type="password" v-model="login.password" class="form-control" placeholder="password" />
+      <button class="btn btn-primary" @click="log">Login</button>
+      <button class="btn btn-warning" >Create Account</button>
     </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+import Cookies from "js-cookie";
 export default {
   name: "App",
+  data() {
+    return {
+      message: {},
+      login: {
+        email: "",
+        password: ""
+      }
+    };
+  },
+  methods: {
+    Alert(response) {
+      this.message = response.data;
+      this.$swal({
+        icon: this.message.status,
+        title: this.message.message
+      });
+    },
+    AlertError(error) {
+      this.message = error;
+      this.$swal({
+        icon: "error",
+        title: error
+      });
+    },
+    log() {
+      axios
+        .post("http://localhost:8000/api/login", this.login)
+        .then(response => {
+          this.Alert(response);
+          const token = response.data.token;
+          if (response.data.status == "success") {
+            Cookies.set("token", token, { expires: 1 });
+            localStorage.setItem("Auth", true);
+            this.me();
+          }
+        })
+        .catch(error => {
+          this.AlertError(error);
+        });
+    },
+    me() {
+      const token = Cookies.get("token");
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+      axios
+        .post("http://localhost:8000/api/me")
+        .then(response => {
+          const user = response.data.message.name;
+          const id = response.data.message.id;
+          const email = response.data.message.email
+          Cookies.set("user", user, { expires: 1 });
+          Cookies.set("id", id, { expires: 1 });
+          Cookies.set("email", email, { expires: 1 });
+          this.$router.replace('/login');
+        })
+        .catch(error => {
+          this.AlertError(error);
+        });
+    },
+  },
 };
 </script>
 
-<style></style>
+<style>
+</style>

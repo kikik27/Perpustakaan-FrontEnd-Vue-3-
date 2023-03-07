@@ -379,7 +379,7 @@ export default {
     },
     getSiswa(page = 1) {
       axios
-        .get("http://localhost:8001/api/siswa?page=" + page)
+        .get("http://localhost:8000/api/siswa?page=" + page)
         .then((response) => {
         this.siswa = response.data;
         this.load = false;
@@ -390,7 +390,7 @@ export default {
     },
     dataSiswa() {
       axios
-        .get("http://localhost:8001/api/datasiswa")
+        .get("http://localhost:8000/api/datasiswa")
         .then((response) => {
           this.allsiswa = response.data;
           this.load = false;
@@ -401,7 +401,7 @@ export default {
     },
     getkelas() {
       axios
-        .get("http://localhost:8001/api/getkelas")
+        .get("http://localhost:8000/api/getkelas")
         .then((response) => {
           this.kelas = response.data;
         })
@@ -411,7 +411,7 @@ export default {
     },
     add() {
       axios
-        .post("http://localhost:8001/api/addsiswa", this.model.siswa)
+        .post("http://localhost:8000/api/addsiswa", this.model.siswa)
         .then((response) => {
           this.Alert(response);
         })
@@ -421,7 +421,7 @@ export default {
     },
     hapus(id) {
       axios
-        .delete(`http://localhost:8001/api/deletesiswa/${id}`)
+        .delete(`http://localhost:8000/api/deletesiswa/${id}`)
         .then((response) => {
           this.Alert(response);
         })
@@ -431,7 +431,7 @@ export default {
     },
     edit(){
       axios
-        .put(`http://localhost:8001/api/ubahsiswa/${this.form.id_siswa}`, this.form)
+        .put(`http://localhost:8000/api/ubahsiswa/${this.form.id_siswa}`, this.form)
         .then(response => {
           this.Alert(response)
         })

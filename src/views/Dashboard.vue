@@ -249,39 +249,39 @@ export default {
       });
     },
     jumlahSiswa() {
-      axios.get("http://localhost:8001/api/jumlahsiswa").then(response => {
+      axios.get("http://localhost:8000/api/jumlahsiswa").then(response => {
         this.jumlah.siswa = response.data;
         this.load = false;
       });
     },
     jumlahDenda() {
-      axios.get("http://localhost:8001/api/jumlahdenda").then(response => {
+      axios.get("http://localhost:8000/api/jumlahdenda").then(response => {
         this.jumlah.denda = response.data;
         this.load = false;
       });
     },
     jumlahKelas() {
-      axios.get("http://localhost:8001/api/jumlahkelas").then(response => {
+      axios.get("http://localhost:8000/api/jumlahkelas").then(response => {
         this.jumlah.kelas = response.data;
         this.load = false;
       });
     },
     jumlahBuku() {
-      axios.get("http://localhost:8001/api/jumlahbuku").then(response => {
+      axios.get("http://localhost:8000/api/jumlahbuku").then(response => {
         this.jumlah.buku = response.data;
         this.load = false;
       });
     },
     jumlahBuku_blm_kembali() {
       axios
-        .get("http://localhost:8001/api/jumlahbukubelumkembali")
+        .get("http://localhost:8000/api/jumlahbukubelumkembali")
         .then(response => {
           this.jumlah.buku_blm_kembali = response.data;
           this.load = false;
         });
     },
     jumlahPeminjaman() {
-      axios.get("http://localhost:8001/api/jumlahpeminjaman").then(response => {
+      axios.get("http://localhost:8000/api/jumlahpeminjaman").then(response => {
         this.jumlah.peminjaman = response.data;
         this.load = false;
       });

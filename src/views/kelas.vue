@@ -200,7 +200,7 @@ export default {
     },
     addkelas() {
       axios
-        .post("http://localhost:8001/api/addkelas", this.model.kelas)
+        .post("http://localhost:8000/api/addkelas", this.model.kelas)
         .then((response) => {this.Alert(response) 
         })
         .catch((error) => {
@@ -209,7 +209,7 @@ export default {
     },
     deletekelas(id) {
       axios
-        .delete(`http://localhost:8001/api/deletekelas/${id}`)
+        .delete(`http://localhost:8000/api/deletekelas/${id}`)
         .then((response) => {
           this.Alert(response)
         })
@@ -219,7 +219,7 @@ export default {
     },
     getkelas(page = 1) {
       axios
-        .get("http://localhost:8001/api/kelas?page=" + page)
+        .get("http://localhost:8000/api/kelas?page=" + page)
         .then(response => {
           this.kelas = response.data;
           this.load = false;
@@ -230,7 +230,7 @@ export default {
     },
     edit(){
       axios
-        .put(`http://localhost:8001/api/ubahkelas/${this.form.id_kelas}`, this.form)
+        .put(`http://localhost:8000/api/ubahkelas/${this.form.id_kelas}`, this.form)
         .then(response => {
           this.Alert(response)
         })
