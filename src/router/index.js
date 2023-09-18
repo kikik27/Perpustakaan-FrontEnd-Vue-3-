@@ -5,7 +5,7 @@ import Dashboard from '../views/Dashboard.vue'
 import kelasPage from '../views/kelas.vue'
 import bukuPage from '../views/buku.vue'
 import peminjamanPage from '../views/peminjaman.vue'
-import login from '../components/login.vue'
+import login from '../components/Login.vue'
 import register from '../components/Register.vue'
 
 const routes = [
